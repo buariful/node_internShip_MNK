@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .container.mt-3
+        h1 Products
+        .d-flex.flex-wrap 
+            each product in products
+                a(href=`/product/${product.id}`)
+                    div.card.m-2(style='width: 18rem;')
+                        img.card-img-top(src=product.image, alt=product.title)
+                        .card-body
+                            h5.card-title= product.title
+                            p.card-text= product.description
+                            p.card-text Price: #{product.price} 

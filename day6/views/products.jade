@@ -1,0 +1,23 @@
+extend layout 
+
+block content 
+   h1 Shopify Products
+   .allProducts 
+    each product in products
+      .product
+        img(src=product.image.src, alt=product.title)
+        h2= product.title
+        p Price: #{product.variants[0].price}
+    //- -------- paginations --------
+   .pagination 
+    ul
+      if Number(currentPage) > 1
+        li
+          a(href=`/products?page=${Number(currentPage) - 1}`) Previous
+      - for(let i = 1; i <= totalPages; i++)
+        li
+          a(href=`/products?page=${i}`)= i
+      if Number(currentPage) < totalPages
+        li
+          a(href=`/products?page=${Number(currentPage) + 1}`) Next 
+    

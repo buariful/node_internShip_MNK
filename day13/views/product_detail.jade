@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .container.mt-5
+        h1= product.title
+        img(src=product.image, alt=product.title, class='img-fluid img-thumbnail')
+        p= product.description
+        form(action='/checkout' method='post')
+            input(type='hidden' name='product_id', value=product.id)
+            input(type='hidden' name='total', value=product.price)
+            script(src='https://checkout.stripe.com/checkout.js' class='stripe-button hidden' data-key='pk_test_51Ows8uF5BKrlUHOAlV9RaQDTDJ12DlTPe5BUMQidw4sJxtnX2EEEfpQKbVMcOzLDUngnX97AWN03X8Uzy3uxkDpB00x1d8FwAz')
+            button.btn.btn-primary(type='submit') Buy Now

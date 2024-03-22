@@ -1,0 +1,69 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+.allProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.product {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-height: 200px;
+  height: 200px;
+}
+
+.product h2 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.product p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+}

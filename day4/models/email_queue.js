@@ -1,0 +1,44 @@
+module.exports = async (sequelize, DataTypes) => {
+  const EmailQueue = sequelize.define(
+    "email_queue",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      email_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [[1, 0]],
+            msg: "Status must be either 1 or 0.",
+          },
+        },
+      },
+      created_at: DataTypes.DATEONLY,
+      send_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
+    },
+    {
+      timestamps: true,
+      freezeTableName: true,
+      tableName: "email_queue",
+    },
+    {
+      underscoredAll: false,
+      underscored: false,
+    }
+  );
+
+  return EmailQueue;
+};

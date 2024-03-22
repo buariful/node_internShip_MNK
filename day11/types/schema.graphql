@@ -1,0 +1,335 @@
+directive @verifyUser on FIELD_DEFINITION
+
+scalar Date
+scalar Upload
+
+type User {
+  id: ID!
+  status: Int
+  first_name: String
+  last_name: String
+  phone: String
+  image: String
+  image_id: Int
+  refer: String
+  profile_id: Int
+  role_id: Int
+  font_color: String
+  time_zone: String
+  time_format: Int
+  clock_format: Int
+  date_format: Int
+  location: String
+  sync_code: String
+  expire_at: Date
+  created_at: Date
+  updated_at: Date
+  profile: Profile
+}
+
+type Image {
+  id: ID!
+  url: String
+  caption: String
+  width: Int
+  height: Int
+  type: Int
+  status: Int
+  user_id: Int
+  created_at: Date
+  updated_at: Date
+
+  user: User
+}
+
+type Note {
+  id: ID!
+  message: String
+  status: Int
+  created_at: Date
+  updated_at: Date
+  user: User
+}
+
+type Calendar {
+  id: ID!
+  user_id: Int
+  title: String
+  start_date: Date
+  end_date: Date
+  status: Int
+  created_at: Date
+  updated_at: Date
+  user: User
+}
+
+type Profile {
+  id: ID!
+  user_id: Int
+  timezone: String
+  dashboard_code: String
+  code: String
+  status: Int
+  created_at: Date
+  updated_at: Date
+  user: User
+}
+
+type Link {
+  id: ID!
+  email: String
+  user_id: Int
+  link: String
+  status: Int
+  created_at: Date
+  updated_at: Date
+
+  user: User
+}
+
+type MutationResponse {
+  success: Boolean!
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+
+type ErrorResponse {
+  path: String
+  message: String
+}
+
+type UserResponse {
+  success: Boolean!
+  data: User
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+input SyncCalendarInput {
+  event_id: String!
+  title: String!
+  start_date: Date!
+  end_date: Date!
+}
+type AllCalendarEventsResponse {
+  success: Boolean!
+  data: [Calendar!]
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+type CustomImageResponse {
+  success: Boolean!
+  data: Image
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+type AllNotesResponse {
+  success: Boolean!
+  data: [Note]
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+type File {
+  id: ID
+  filename: String
+  mimetype: String
+  path: String
+}
+type FileUploadResponse {
+  success: Boolean!
+  data: File
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+type LinkResponse {
+  success: Boolean!
+  data: Link
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+
+type StepsImagesResponse {
+  success: Boolean!
+  data: [String]
+  message: String
+  errors: [ErrorResponse!]
+  code: String
+}
+
+type Movie {
+  id: ID!
+  title: String!
+  director_id: Int!
+  mainGenre: String!
+  status: Int!
+  review: Int
+  allActors: [Actor]
+  directors: [Director]
+  reviews: [Review]
+  genres: [Genre]
+}
+
+type Actor {
+  id: ID!
+  name: String!
+}
+type Director {
+  id: ID!
+  name: String!
+}
+
+type Review {
+  id: ID!
+  notes: String!
+  movie_id: Int!
+}
+
+type Genre {
+  id: ID!
+  name: String!
+}
+type MovieActor {
+  id: ID!
+  actor_id: ID!
+  movie_id: ID!
+}
+
+type SingleMovieResponse {
+  success: Boolean!
+  message: String!
+  data: Movie
+}
+type SingleActorResponse {
+  success: Boolean!
+  message: String!
+  data: Actor
+}
+type SingleDirectorResponse {
+  success: Boolean!
+  message: String!
+  data: Director
+}
+type SingleGenreResponse {
+  success: Boolean!
+  message: String!
+  data: Genre
+}
+type SingleReviewResponse {
+  success: Boolean!
+  message: String!
+  data: Review
+}
+
+type MovieListResponse {
+  success: Boolean!
+  message: String!
+  data: [Movie]
+}
+type ActorListResponse {
+  success: Boolean!
+  message: String!
+  data: [Actor]
+}
+type DirectorListResponse {
+  success: Boolean!
+  message: String!
+  data: [Director]
+}
+type GenreListResponse {
+  success: Boolean!
+  message: String!
+  data: [Genre]
+}
+type ReviewListResponse {
+  success: Boolean!
+  message: String!
+  data: [Review]
+}
+type MovieActorListResponse {
+  success: Boolean!
+  message: String!
+  data: [MovieActor]
+}
+
+type Query {
+  user: UserResponse! @verifyUser
+
+  getAllNotes: AllNotesResponse! @verifyUser
+
+  getAllCalendarEvents: AllCalendarEventsResponse! @verifyUser
+
+  getCustomImage: CustomImageResponse! @verifyUser
+
+  link: LinkResponse! @verifyUser
+
+  getStepsImages: StepsImagesResponse!
+
+  getSingleMovie(id: ID): SingleMovieResponse
+  getSingleActor(id: ID): SingleActorResponse
+  getSingleDirector(id: ID): SingleDirectorResponse
+  getSingleGenre(id: ID): SingleGenreResponse
+  getSingleReview(id: ID): SingleReviewResponse
+
+  getAllMovies: MovieListResponse
+  getAllActors: ActorListResponse
+  getAllDirectors: DirectorListResponse
+  getAllGenre: GenreListResponse
+  getAllReviews: ReviewListResponse
+  getAllMovieActors: MovieActorListResponse
+}
+
+input AddActorToMoviesInput {
+  genre_id: Int!
+  actor_id: Int!
+}
+
+type AddActorToMoviesResponse {
+  success: Boolean!
+  message: String!
+}
+
+type Mutation {
+  updateUser(
+    sync_code: String
+    font_color: String
+    time_zone: String
+    time_format: Int
+    clock_format: Int
+    date_format: Int
+    location: String
+    lat: Float
+    lng: Float
+  ): MutationResponse! @verifyUser
+
+  createNote(message: String!): MutationResponse! @verifyUser
+  updateNote(id: ID!, message: String!): MutationResponse! @verifyUser
+  deleteNote(id: ID!): MutationResponse! @verifyUser
+
+  createLink(link: String!): MutationResponse! @verifyUser
+  deactivateAllLinks: MutationResponse! @verifyUser
+
+  syncCalendar(input: [SyncCalendarInput!]): MutationResponse! @verifyUser
+  updateCalendarEvent(
+    id: Int!
+    title: String!
+    start_date: Date!
+    end_date: Date!
+  ): MutationResponse! @verifyUser
+  deleteCalendarEvent(id: Int!): MutationResponse! @verifyUser
+
+  createCustomImage(url: String!): MutationResponse! @verifyUser
+  updateCustomImage(id: ID!, url: String!): MutationResponse! @verifyUser
+  deleteCustomImage(id: ID!): MutationResponse! @verifyUser
+
+  uploadFile(file: Upload!): FileUploadResponse!
+
+  addActorToMoviesForGenre(
+    input: AddActorToMoviesInput
+  ): AddActorToMoviesResponse!
+}

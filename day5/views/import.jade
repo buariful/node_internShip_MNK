@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    title Import CSV File
+  body
+    h1 Import CSV File
+   
+    form(id='importForm', method='POST', enctype='multipart/form-data', action='/api/v1/import')
+      input(type='file', name='file', accept='.csv,.xlsx')
+      button(type='submit') Upload CSV File
+    #errorMessage
+    button(id='export' style="margin:5px") Export
+
+  script.
+    const form = document.getElementById('importForm');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('/api/v1/import', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+
+        if (data.error) {
+          errorMessage.textContent = data.message;
+        } else {
+          errorMessage.textContent = 'CSV file imported successfully';
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Error: ' + error.message;
+      }
+    });
+
+    document.getElementById("export").addEventListener("click",()=>{
+      fetch("/api/v1/export",{method: 'POST',}).then(res=>res.blob()).then(blob=>{
+         // Create a URL for the blob object
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      // Create a link element
+      const link = document.createElement('a');
+      // Set the link's href attribute to the URL
+      link.href = url;
+      // Set the link's download attribute to specify the filename
+      link.setAttribute('download', 'transactions.csv');
+      // Append the link to the document body
+      document.body.appendChild(link);
+      // Simulate click on the link to trigger the download
+      link.click();
+      // Remove the link from the document body
+      document.body.removeChild(link);
+      }).catch((err)=>console.log(err))
+      
+    })
+
+   
