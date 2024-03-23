@@ -119,81 +119,58 @@ exports.updateVariable = async (req, res) => {
 
 exports.evaluate = async (req, res) => {
   try {
-    function castVariable(value, type) {
-      switch (type) {
-        case "INTEGER":
-          return parseInt(value, 10);
-        case "FLOAT":
-          return parseFloat(value);
-        case "STRING":
-          return String(value);
-        default:
-          return value;
+    const variablePayload = JSON.parse(base64url.decode(req.query.variable));
+
+    // Query all rules
+    const rules = await Rules.findAll();
+
+    let formatedObj = {};
+    for (const [key, value] of Object.entries(variablePayload)) {
+      const variable = await Variables.findOne({ where: { name: key } });
+      if (variable) {
+        // Cast variable value to match the database type
+        let castValue;
+        switch (variable.type) {
+          case "INTEGER":
+            castValue = parseInt(value);
+            break;
+          case "FLOAT":
+            castValue = parseFloat(value);
+            break;
+          default:
+            castValue = value.toString();
+        }
+
+        formatedObj[key] = castValue;
       }
     }
 
-    function evaluateCondition(variables, condition) {
-      return true;
-    }
-    const encodedVariable = req.query.variable;
-    if (!encodedVariable) {
-      return res.status(400).json({ error: "Variable is missing" });
-    }
-
-    const decodedVariable = JSON.parse(base64url.decode(encodedVariable));
-
-    const rules = await Rules.findAll();
+    // Evaluate rules
     const evaluationResults = [];
-
     for (const rule of rules) {
-      const ruleVariables = JSON.parse(rule.condition);
-      const substitutedVariables = {};
+      let condition = rule.condition;
 
-      // Substitute variables in the rule condition
-      for (const [variableName, variableValue] of Object.entries(
-        ruleVariables
-      )) {
-        if (decodedVariable.hasOwnProperty(variableName)) {
-          substitutedVariables[variableName] = decodedVariable[variableName];
+      for (const [key, value] of Object.entries(variablePayload)) {
+        console.log(typeof value);
+        if (typeof value === "string") {
+          condition = condition.replace(
+            new RegExp(`\\b${key}\\b`, "g"),
+            `'${value}'`
+          );
+        } else {
+          condition = condition.replace(new RegExp(`\\b${key}\\b`, "g"), value);
         }
       }
-
-      // Query the database to get the variable types
-      const variableTypes = await Variables.findAll({
-        attributes: ["name", "type"],
-        where: {
-          name: {
-            [Op.in]: Object.keys(substitutedVariables),
-          },
-        },
-      });
-
-      // Cast variables to match the database version
-      for (const variableType of variableTypes) {
-        substitutedVariables[variableType.name] = castVariable(
-          substitutedVariables[variableType.name],
-          variableType.type
-        );
-      }
-
-      // Evaluate the rule condition
-      const isRuleSatisfied = evaluateCondition(
-        substitutedVariables,
-        rule.condition
-      );
-
-      // If rule condition is true, add to the result
-      if (isRuleSatisfied) {
-        evaluationResults.push({
-          rule_id: rule.id,
-          result: rule.action,
-        });
+      console.log(condition);
+      // Evaluate condition
+      if (eval(condition)) {
+        evaluationResults.push({ rule_id: rule.id, result: rule.action });
       }
     }
 
-    res.status(200).json(evaluationResults);
+    res.json(evaluationResults);
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

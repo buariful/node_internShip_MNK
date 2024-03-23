@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM("INTEGER", "FLOAT", "STRING"),
         allowNull: false,
       },
-      created_at: DataTypes.DATEONLY,
-      updated_at: DataTypes.DATE,
+      // created_at: DataTypes.DATEONLY,
+      // updated_at: DataTypes.DATE,
     },
     {
       timestamps: true,

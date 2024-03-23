@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       condition: DataTypes.STRING,
       action: DataTypes.STRING,
-      created_at: DataTypes.DATEONLY,
-      updated_at: DataTypes.DATE,
+      // created_at: DataTypes.DATEONLY,
+      // updated_at: DataTypes.DATE,
     },
     {
       timestamps: true,

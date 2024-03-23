@@ -67,3 +67,10 @@ GET /api/v1/evaluation?variable=base64
 ```
 
 - Everything must be done by end of date
+
+-GET /api/v1/evaluation?variable=base64
+-An object containing variables along with their corresponding values will be sent as a query parameter. The server will then query the rules table to determine which rules are satisfied based on the values provided in the object. Subsequently, the endpoint will return an array of results in the following format
+[{
+"rule_id": 3,
+"result": "Rule_3 action_3"
+}]
