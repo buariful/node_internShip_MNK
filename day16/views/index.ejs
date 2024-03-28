@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/fabric.min.js"></script>
+  </head>
+  <body class="min-h-screen">
+    <!-- header -->
+    <header
+      class="bg-black px-5 py-2 flex justify-between items-center text-white"
+    >
+      <p>Logo</p>
+      <button
+        class="text-black bg-white px-4 py-2 rounded"
+        onclick="downloadCanvas()"
+      >
+        Download
+      </button>
+    </header>
+
+    <div class="grid grid-cols-12 gap-0 w-full min-h-screen h-full">
+      <div class="col-span-4 flex">
+        <!----- left menu ---- -->
+        <ul
+          id="left_side_menu"
+          class="h-full w-[110px] text-sm bg-[#EEEEEE] flex flex-col gap-3 pt-5 pl-2 font-bold"
+        >
+          <li>
+            <button onclick="handleOpenTab('elements')" class="tab">
+              Elements
+            </button>
+          </li>
+          <li>
+            <button onclick="handleOpenTab('images')" class="tab">
+              Images
+            </button>
+          </li>
+          <li>
+            <button onclick="handleOpenTab('text')" class="tab">Text</button>
+          </li>
+          <li>
+            <button onclick="handleOpenTab('background')" class="tab">
+              Background
+            </button>
+          </li>
+        </ul>
+        <!-- right sub menu -->
+        <div
+          id="right_sub_menu"
+          class="border-r flex-1 p-5 max-h-screen overflow-y-auto bg-white"
+        >
+          <%- include("elements")%> <%- include("images")%> <%-
+          include("text")%> <%- include("background")%>
+        </div>
+      </div>
+
+      <div class="col-span-8">
+        <div
+          class="min-h-[40px] bg-white flex px-3 py-2 justify-between border-b"
+        >
+          <select
+            name="font_size_select"
+            class="min-w-[50px] hidden"
+            id="font_size_select"
+            onchange="updateTextboxFontSize()"
+          >
+            <option value="14">14</option>
+            <option value="18">18</option>
+            <option value="22">22</option>
+            <option value="24">24</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="60">60</option>
+          </select>
+
+          <button id="deleteButton" class="hidden" onclick="deleteSelected()">
+            <img src="/img/delete.png" alt="" class="w-[22px]" />
+          </button>
+        </div>
+
+        <div class="grid place-items-center h-full w-full">
+          <canvas id="canvas" class="border"> </canvas>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script></script>
+  </body>
+</html>
