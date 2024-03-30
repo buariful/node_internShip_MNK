@@ -41,14 +41,17 @@ exports.createByImporting = async (req, res) => {
     if (columns.length !== data[0]?.length) {
       return res.status(400).json({
         error: true,
-        message: "This file doesn't match!",
+        message:
+          "order_id, user_id, shipping_dock_id, amount, discount, tax, total, notes, status fields are required!",
       });
     }
     columns.map((clm) => {
       if (!data[0]?.includes(clm))
         return res.status(400).json({
           error: true,
-          message: "This file doesn't match!",
+          // message: "This file doesn't match!",
+          message:
+            "order_id, user_id, shipping_dock_id, amount, discount, tax, total, notes, status fields are required!",
         });
     });
 
