@@ -36,6 +36,7 @@ app.use(function (req, res, next) {
 
 // calling the cronjobs
 require("./cronjobs/email_queue")();
+require("./cronjobs/email_sending")();
 
 // error handler
 app.use(function (err, req, res, next) {

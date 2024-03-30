@@ -73,31 +73,27 @@ router.get("/email_queue", async (req, res, next) => {
 //   });
 // });
 
+const sendEmails = async (emails) => {
+  const transport = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "e8bc00f7982dac",
+      pass: "7c7c1e15c84a4b",
+    },
+  });
+
+  const emailPromises = emails.map(async (email) => {
+    await transport.sendMail(email);
+  });
+
+  await Promise.all(emailPromises);
+};
 router.get("/test", async (req, res, next) => {
   try {
-    const sendEmails = async (emails) => {
-      const transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "e8bc00f7982dac",
-          pass: "7c7c1e15c84a4b",
-        },
-      });
-
-      // Create an array of promises for sending emails
-      const emailPromises = emails.map(async (email) => {
-        await transport.sendMail(email);
-      });
-
-      // Execute all promises concurrently
-      await Promise.all(emailPromises);
-    };
-
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
 
-    // Find all email_queue records with send_at equal to today's date
     const emailQueueRecords = await db.email_queue.findAll({
       where: {
         send_at: today,
@@ -105,40 +101,34 @@ router.get("/test", async (req, res, next) => {
       include: [{ model: db.email }, { model: db.user }],
     });
 
+    const emails = [];
+
     // Loop through each email_queue record
     for (const record of emailQueueRecords) {
-      // Extract user details
       const { email, name } = record.user;
       const { subject, body } = record.email;
-
-      // Replace placeholders in the email body
       const replacedBody = body
         .replace("{{{name}}}", name)
         .replace("{{{email}}}", email);
 
-      const emails = [];
-      // Add email information to the array
       emails.push({
         from: "hudai@ethereal.email",
         to: email,
         subject: subject,
         html: replacedBody,
       });
-
-      // Update the status of the email_queue record to indicate it has been sent
-      await record.update({ status: 1 });
     }
 
-    // Send all emails at once
     await sendEmails(emails);
+    await db.email_queue.destroy({ where: { send_at: today } });
 
     res.status(200).json({
       error: false,
-      mes: "dddddd",
+      mes: "Emails sent successfully.",
       emailQueueRecords,
     });
   } catch (error) {
-    res.send("err", error);
+    res.status(500).json({ error: true, message: error.message });
   }
 });
 
