@@ -3,9 +3,8 @@ var router = express.Router();
 const axios = require("axios");
 
 // const url = "https://53f146-5.myshopify.com/admin/api/2024-01/products.json";
-// const accessToken = process.env.SHOPIFY_ACCESS_TOKEN;
 const url = "https://844268-7c.myshopify.com/admin/api/2024-01/products.json";
-const accessToken = "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";
+const accessToken = process.env.SHOPIFY_ACCESS_TOKEN;
 const headers = {
   "X-Shopify-Access-Token": accessToken,
 };

@@ -4,8 +4,7 @@ const db = require("../models");
 const Customer = db.customer;
 
 const url = "https://844268-7c.myshopify.com/admin/api/2024-01/customers.json";
-// const accessToken = process.env.SHOPIFY_ACCESS_TOKEN;
-const accessToken = "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";
+const accessToken = process.env.SHOPIFY_ACCESS_TOKEN;
 
 const custormer = async () => {
   try {

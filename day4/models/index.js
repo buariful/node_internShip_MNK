@@ -86,7 +86,7 @@ try {
   db.sequelize
     .sync({ force: false })
     .then(() => console.log("DB synced succesfully"))
-    .catch(() => console.log("DB is not synced"));
+    .catch((err) => console.log(err));
 } catch (error) {
   console.log(error?.message);
 }

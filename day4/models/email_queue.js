@@ -1,4 +1,4 @@
-module.exports = async (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const EmailQueue = sequelize.define(
     "email_queue",
     {
@@ -9,11 +9,11 @@ module.exports = async (sequelize, DataTypes) => {
       },
       email_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       status: {
         type: DataTypes.INTEGER,
@@ -30,7 +30,7 @@ module.exports = async (sequelize, DataTypes) => {
       updated_at: DataTypes.DATE,
     },
     {
-      timestamps: true,
+      timestamps: false,
       freezeTableName: true,
       tableName: "email_queue",
     },

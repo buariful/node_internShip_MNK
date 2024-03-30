@@ -48,5 +48,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  Email.associate = (models) => {
+    Email.belongsToMany(models.user, {
+      through: "email_queue",
+      foreignKey: "email_id",
+      otherKey: "user_id",
+      as: "email",
+      onDelete: "NO ACTION",
+      onUpdate: "NO ACTION",
+    });
+  };
+
   return Email;
 };

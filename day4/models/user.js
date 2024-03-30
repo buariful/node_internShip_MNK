@@ -39,6 +39,16 @@ module.exports = (sequelize, DataTypes) => {
       underscored: false,
     }
   );
+  User.associate = (models) => {
+    User.belongsToMany(models.email, {
+      through: "email_queue",
+      foreignKey: "user_id",
+      otherKey: "email_id",
+      as: "user",
+      onDelete: "NO ACTION",
+      onUpdate: "NO ACTION",
+    });
+  };
 
   return User;
 };
