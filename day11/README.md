@@ -2,6 +2,8 @@
 
 ## Instructions
 
+# http://localhost:3001/graphql
+
 - setup project
 - clone to your github
 - Read the documentation https://www.apollographql.com/docs/

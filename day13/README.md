@@ -2,6 +2,10 @@
 
 ## Instructions
 
+# http://localhost:3000/
+
+# http://localhost:3000/product
+
 - setup project
 - clone to your github
 - Use this library https://github.com/stripe/stripe-php
