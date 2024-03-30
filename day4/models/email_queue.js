@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       created_at: DataTypes.DATEONLY,
-      send_at: DataTypes.DATE,
+      send_at: DataTypes.DATEONLY,
       updated_at: DataTypes.DATE,
     },
     {
@@ -40,5 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
+  EmailQueue.associate = (models) => {
+    EmailQueue.belongsTo(models.user, { foreignKey: "user_id" });
+    EmailQueue.belongsTo(models.email, { foreignKey: "email_id" });
+  };
   return EmailQueue;
 };

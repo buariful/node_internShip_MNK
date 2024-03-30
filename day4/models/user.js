@@ -40,13 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.associate = (models) => {
-    User.belongsToMany(models.email, {
-      through: "email_queue",
+    User.hasMany(models.email_queue, {
       foreignKey: "user_id",
-      otherKey: "email_id",
-      as: "user",
-      onDelete: "NO ACTION",
-      onUpdate: "NO ACTION",
     });
   };
 
