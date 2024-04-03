@@ -33,45 +33,45 @@ router.get("/email_queue", async (req, res, next) => {
   }
 });
 
-// router.get("/test", async (req, res, next) => {
-//   const activeUsers = await db.user.findAll({ where: { status: 1 } });
+router.get("/test", async (req, res, next) => {
+  const activeUsers = await db.user.findAll({ where: { status: 1 } });
 
-//   const today = new Date(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
-//   const current_day = today.getDay();
-//   const send_at = new Date(
-//     today.getFullYear(),
-//     today.getMonth(),
-//     today.getDate() + 1
-//   );
+  const today = new Date(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+  const current_day = today.getDay();
+  const send_at = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
 
-//   const oddIdEmails =
-//     current_day === 1 || current_day === 3 || current_day === 5;
-//   const emails = await db.email.findAll({
-//     where: literal(`MOD(id, 2) = ${oddIdEmails ? "1" : "0"}`),
-//   });
+  const oddIdEmails =
+    current_day === 1 || current_day === 3 || current_day === 5;
+  const emails = await db.email.findAll({
+    where: literal(`MOD(id, 2) = ${oddIdEmails ? "1" : "0"}`),
+  });
 
-//   const emailQueueData = [];
-//   for (const email of emails) {
-//     for (const user of activeUsers) {
-//       emailQueueData.push({
-//         user_id: user.id,
-//         email_id: email.id,
-//         status: 0,
-//         send_at: send_at.toISOString().substring(0, 10), //"YYYY-MM-DD"
-//         created_at: today,
-//         updated_at: today,
-//       });
-//     }
-//   }
+  const emailQueueData = [];
+  for (const email of emails) {
+    for (const user of activeUsers) {
+      emailQueueData.push({
+        user_id: user.id,
+        email_id: email.id,
+        status: 0,
+        send_at: send_at.toISOString().substring(0, 10), //"YYYY-MM-DD"
+        created_at: today,
+        updated_at: today,
+      });
+    }
+  }
 
-//   // await db.email_queue.bulkCreate(emailQueueData);
+  await db.email_queue.bulkCreate(emailQueueData);
 
-//   res.status(200).json({
-//     // users: activeUsers,
-//     // emails: emails,
-//     emailQueueData,
-//   });
-// });
+  res.status(200).json({
+    // users: activeUsers,
+    // emails: emails,
+    emailQueueData,
+  });
+});
 
 const sendEmails = async (emails) => {
   const transport = nodemailer.createTransport({
@@ -89,11 +89,27 @@ const sendEmails = async (emails) => {
 
   await Promise.all(emailPromises);
 };
-router.get("/test", async (req, res, next) => {
+router.get("/send-email", async (req, res, next) => {
   try {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+    const sendEmails = async (emails) => {
+      const transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: "e8bc00f7982dac",
+          pass: "7c7c1e15c84a4b",
+        },
+      });
 
+      const emailPromises = emails.map(async (email) => {
+        await transport.sendMail(email);
+      });
+
+      await Promise.all(emailPromises);
+    };
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const emailQueueRecords = await db.email_queue.findAll({
       where: {
         send_at: today,
@@ -102,8 +118,6 @@ router.get("/test", async (req, res, next) => {
     });
 
     const emails = [];
-
-    // Loop through each email_queue record
     for (const record of emailQueueRecords) {
       const { email, name } = record.user;
       const { subject, body } = record.email;
@@ -121,14 +135,10 @@ router.get("/test", async (req, res, next) => {
 
     await sendEmails(emails);
     await db.email_queue.destroy({ where: { send_at: today } });
-
-    res.status(200).json({
-      error: false,
-      mes: "Emails sent successfully.",
-      emailQueueRecords,
-    });
+    res.send("sent");
+    console.log("all email sent");
   } catch (error) {
-    res.status(500).json({ error: true, message: error.message });
+    console.log("senemail->>", error);
   }
 });
 

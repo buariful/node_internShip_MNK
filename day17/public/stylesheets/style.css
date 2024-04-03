@@ -1,0 +1,55 @@
+.hidden {
+  display: none;
+}
+
+#calendar {
+  width: 300px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weekdays {
+  display: flex;
+}
+
+.weekdays div {
+  width: calc(100% / 7);
+  text-align: center;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.days div {
+  width: calc(100% / 7);
+  text-align: center;
+  margin-bottom: 5px;
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.disabled {
+  color: #ccc; /* Style disabled dates */
+  pointer-events: none; /* Disable pointer events for disabled dates */
+}
+
+.selectable:hover {
+  background-color: lightgray; /* Change background color on hover for selectable dates */
+}
+
+button:disabled {
+  cursor: not-allowed;
+  color: #ccc;
+  border-color: #ccc;
+}
+
+#active_date {
+  background: blue;
+  color: white;
+}

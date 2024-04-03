@@ -1,0 +1,82 @@
+[
+  {
+    "label_id": "pacific_time_label",
+    "label": "Pacific Time",
+    "offset": -7
+  },
+  {
+    "label_id": "mountain_time_label",
+    "label": "Mountain Time",
+    "offset": -6
+  },
+  {
+    "label_id": "est_time_label",
+    "label": "Eastern Time",
+    "offset": -4
+  },
+  {
+    "label_id": "atlantic_time_label",
+    "label": "Atlantic Time",
+    "offset": -3
+  },
+  {
+    "label_id": "hongkong_time_label",
+    "label": "Hong Kong Time",
+    "offset": 8
+  },
+  {
+    "label_id": "jakarta_time_label",
+    "label": "Jakarta Time",
+    "offset": 7
+  },
+  {
+    "label_id": "kabul_time_lable",
+    "label": "Kabul Time",
+    "offset": 4.5
+  },
+  {
+    "label_id": "katmandu_time_label",
+    "label": "Katmandu Time",
+    "offset": 5.75
+  },
+  {
+    "label_id": "berlin_time_label",
+    "label": "Berlin Time",
+    "offset": 2
+  },
+  {
+    "label_id": "helsinki_time_label",
+    "label": "Helsinki Time",
+    "offset": 3
+  },
+  {
+    "label_id": "dublin_time_label",
+    "label": "Dublin Time",
+    "offset": 1
+  },
+  {
+    "label_id": "samara_time_label",
+    "label": "Samara Time",
+    "offset": 4
+  },
+  {
+    "label_id": "bogota_time_label",
+    "label": "Bogota Time",
+    "offset": -5
+  },
+  {
+    "label_id": "campo_time_label",
+    "label": "Campo Time",
+    "offset": -4
+  },
+  {
+    "label_id": "caracas_time_label",
+    "label": "Caracas Time",
+    "offset": -4.5
+  },
+  {
+    "label_id": "lima_time_label",
+    "label": "Lima Time",
+    "offset": -5
+  }
+]

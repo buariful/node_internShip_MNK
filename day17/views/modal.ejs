@@ -1,0 +1,310 @@
+<div
+  class="modal fade"
+  id="timezoneModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="mb-2">Time Zone</h4>
+              <b>USA/CANADA</b>
+              <div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('pacific_time_label')"
+                    id="pacificTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="pacificTime"
+                    id="pacific_time_label"
+                  >
+                    Pacific Time 8:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('mountain_time_label')"
+                    id="mountainTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="mountainTime"
+                    id="mountain_time_label"
+                  >
+                    Mountain Time 9:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('est_time_label')"
+                    id="est"
+                  />
+                  <label class="form-check-label" for="est" id="est_time_label">
+                    Eastern Time 10:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('atlantic_time_label')"
+                    id="atlanticTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="atlanticTime"
+                    id="atlantic_time_label"
+                  >
+                    Atlantic Time 11:42pm
+                  </label>
+                </div>
+              </div>
+              <b>ASIA</b>
+              <div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('hongkong_time_label')"
+                    id="hongkongTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="hongkongTime"
+                    id="hongkong_time_label"
+                  >
+                    Hong Kong Time 8:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('jakarta_time_label')"
+                    id="jakartaTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="jakartaTime"
+                    id="jakarta_time_label"
+                  >
+                    Jakarta Time 9:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('kabul_time_lable')"
+                    id="kabultTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="kabultTime"
+                    id="kabul_time_lable"
+                  >
+                    Kabul Time 10:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('katmandu_time_label')"
+                    id="katmanduTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="katmanduTime"
+                    id="katmandu_time_label"
+                  >
+                    Katmandu Time 11:42pm
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="d-flex justify-content-between">
+                <div class="form-check form-switch mb-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >24 hour</label
+                  >
+                </div>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <b>EUROPE</b>
+              <div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('berlin_time_label')"
+                    id="berlinTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="berlinTime"
+                    id="berlin_time_label"
+                  >
+                    Berlin Time 8:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('helsinki_time_label')"
+                    id="helsinkiTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="helsinkiTime"
+                    id="helsinki_time_label"
+                  >
+                    Helsinki Time 9:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('dublin_time_label')"
+                    id="dublinTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="dublinTime"
+                    id="dublin_time_label"
+                  >
+                    Dublin Time 10:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('samara_time_label')"
+                    id="samaraTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="samaraTime"
+                    id="samara_time_label"
+                  >
+                    Samara Time 11:42pm
+                  </label>
+                </div>
+              </div>
+              <b>SOUTH AMERICA</b>
+              <div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('bogota_time_label')"
+                    id="bogotaTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="bogotaTime"
+                    id="bogota_time_label"
+                  >
+                    Bogota Time 8:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('campo_time_label')"
+                    id="campoTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="campoTime"
+                    id="campo_time_label"
+                  >
+                    Campo Grande Time 9:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('caracas_time_label')"
+                    id="caracasTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="caracasTime"
+                    id="caracas_time_label"
+                  >
+                    Caracas Time 10:42pm
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    onclick="timeZoneSelect('lima_time_label')"
+                    id="limaTime"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="limaTime"
+                    id="lima_time_label"
+                  >
+                    Lima Time 11:42pm
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
