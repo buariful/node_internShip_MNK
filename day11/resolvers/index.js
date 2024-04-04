@@ -38,10 +38,10 @@ const allMovieActorResolver = require("./all/allMovieActor");
 // const connectionStepsResolver = require("./custom/connectionSteps");
 
 module.exports = {
-  Upload: GraphQLUpload,
+  // Upload: GraphQLUpload,
   Query: {
-    user: singleUserResolver,
-    link: singleLinkResolver,
+    // user: singleUserResolver,
+    // link: singleLinkResolver,
     // ...calendarResolver.Query,
     // ...customImageResolver.Query,
     // ...noteResolver.Query,
@@ -60,9 +60,9 @@ module.exports = {
     getAllMovieActors: allMovieActorResolver,
   },
   Mutation: {
-    updateUser: updateUserResolver,
-    createLink: createLinkResolver,
-    deactivateAllLinks: deactivateAllLinksResolver,
+    // updateUser: updateUserResolver,
+    // createLink: createLinkResolver,
+    // deactivateAllLinks: deactivateAllLinksResolver,
     // uploadFile: uploadFileMutationResolver,
     // ...calendarResolver.Mutation,
     // ...customImageResolver.Mutation,
@@ -73,6 +73,6 @@ module.exports = {
   // ...calendarResolver.Type,
   // ...noteResolver.Type,
 
-  User: typeUserResolver,
-  Link: typeLinkResolver,
+  // User: typeUserResolver,
+  // Link: typeLinkResolver,
 };

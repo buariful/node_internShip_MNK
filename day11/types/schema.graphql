@@ -258,17 +258,17 @@ type MovieActorListResponse {
 }
 
 type Query {
-  user: UserResponse! @verifyUser
+  # user: UserResponse! @verifyUser
 
-  getAllNotes: AllNotesResponse! @verifyUser
+  # getAllNotes: AllNotesResponse! @verifyUser
 
-  getAllCalendarEvents: AllCalendarEventsResponse! @verifyUser
+  # getAllCalendarEvents: AllCalendarEventsResponse! @verifyUser
 
-  getCustomImage: CustomImageResponse! @verifyUser
+  # getCustomImage: CustomImageResponse! @verifyUser
 
-  link: LinkResponse! @verifyUser
+  # link: LinkResponse! @verifyUser
 
-  getStepsImages: StepsImagesResponse!
+  # getStepsImages: StepsImagesResponse!
 
   getSingleMovie(id: ID): SingleMovieResponse
   getSingleActor(id: ID): SingleActorResponse
@@ -295,39 +295,39 @@ type AddActorToMoviesResponse {
 }
 
 type Mutation {
-  updateUser(
-    sync_code: String
-    font_color: String
-    time_zone: String
-    time_format: Int
-    clock_format: Int
-    date_format: Int
-    location: String
-    lat: Float
-    lng: Float
-  ): MutationResponse! @verifyUser
+  # updateUser(
+  #   sync_code: String
+  #   font_color: String
+  #   time_zone: String
+  #   time_format: Int
+  #   clock_format: Int
+  #   date_format: Int
+  #   location: String
+  #   lat: Float
+  #   lng: Float
+  # ): MutationResponse! @verifyUser
 
-  createNote(message: String!): MutationResponse! @verifyUser
-  updateNote(id: ID!, message: String!): MutationResponse! @verifyUser
-  deleteNote(id: ID!): MutationResponse! @verifyUser
+  # createNote(message: String!): MutationResponse! @verifyUser
+  # updateNote(id: ID!, message: String!): MutationResponse! @verifyUser
+  # deleteNote(id: ID!): MutationResponse! @verifyUser
 
-  createLink(link: String!): MutationResponse! @verifyUser
-  deactivateAllLinks: MutationResponse! @verifyUser
+  # createLink(link: String!): MutationResponse! @verifyUser
+  # deactivateAllLinks: MutationResponse! @verifyUser
 
-  syncCalendar(input: [SyncCalendarInput!]): MutationResponse! @verifyUser
-  updateCalendarEvent(
-    id: Int!
-    title: String!
-    start_date: Date!
-    end_date: Date!
-  ): MutationResponse! @verifyUser
-  deleteCalendarEvent(id: Int!): MutationResponse! @verifyUser
+  # syncCalendar(input: [SyncCalendarInput!]): MutationResponse! @verifyUser
+  # updateCalendarEvent(
+  #   id: Int!
+  #   title: String!
+  #   start_date: Date!
+  #   end_date: Date!
+  # ): MutationResponse! @verifyUser
+  # deleteCalendarEvent(id: Int!): MutationResponse! @verifyUser
 
-  createCustomImage(url: String!): MutationResponse! @verifyUser
-  updateCustomImage(id: ID!, url: String!): MutationResponse! @verifyUser
-  deleteCustomImage(id: ID!): MutationResponse! @verifyUser
+  # createCustomImage(url: String!): MutationResponse! @verifyUser
+  # updateCustomImage(id: ID!, url: String!): MutationResponse! @verifyUser
+  # deleteCustomImage(id: ID!): MutationResponse! @verifyUser
 
-  uploadFile(file: Upload!): FileUploadResponse!
+  # uploadFile(file: Upload!): FileUploadResponse!
 
   addActorToMoviesForGenre(
     input: AddActorToMoviesInput
